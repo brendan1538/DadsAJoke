@@ -11,3 +11,27 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.card.small .card-content, .card.medium .card-content, .card.large .card-content {
+  overflow: scroll;
+}
+
+.card .card-action.single a:not(.btn):not(.btn-large):not(.btn-small):not(.btn-large):not(.btn-floating) {
+  margin-right: 0;
+}
+
+.search-row {
+  width: 80%;
+}
+
+.joke-row {
+  width: 70%;
+}
+
+.card .card-action a:not(.btn):not(.btn-large):not(.btn-small):not(.btn-large):not(.btn-floating) {
+  color: #26a69a;
+}
+
+.card .card-action a:not(.btn):not(.btn-large):not(.btn-small):not(.btn-large):not(.btn-floating):hover {
+    color: #2bc6b7;
+}
