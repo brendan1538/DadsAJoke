@@ -1,13 +1,44 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
-function Search() {
-	return (
-		<div className="input-field col s11">
-			<i className="material-icons prefix">search</i>
-			<input type="text" id="search-input" />
-			<label for="search-input">Search for Dad jokes...</label>
-		</div>
-	);
+import { searchJokes } from '../redux/actions'
+
+class Search extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			input: ""
+		}
+		this.handleSearch = this.handleSearch.bind(this);
+	}
+
+	updateInput(i) {
+		this.setState({ input: i });
+	}
+
+	handleSearch() {
+		console.log(this.state.input);
+		this.props.searchJokes(this.state.input);
+	}
+
+	_handleKeyDown = (e) => {
+		if (e.key === 'Enter') {
+			this.handleSearch();
+		}
+	}
+
+	render() {
+		return (
+			<div className="input-field col s11">
+				<i className="material-icons prefix">search</i>
+				<input type="text" id="search-input" onChange={e => this.updateInput(e.target.value)} onKeyDown={this._handleKeyDown} />
+				<label for="search-input">Search for Dad jokes...</label>
+				<a className="waves-effect waves-light btn" onClick={this.handleSearch}>Search</a>
+			</div>
+		);
+	}
 }
-
-export default Search;
+export default connect(
+	null,
+	{ searchJokes }
+)(Search);

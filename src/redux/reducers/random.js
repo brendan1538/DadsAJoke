@@ -1,8 +1,8 @@
-const initialState = {
+export const initialState = {
 	searchTerm: ''
 }
 
-export default function randomReducer(state = initialState, action) {
+export function randomReducer(state = initialState, action) {
 	switch (action.type) {
 		case "GET_JOKES_START": {
 			return ("GET_JOKES_START");

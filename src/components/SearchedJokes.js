@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
 import axios from 'axios';
 
 import Joke from './Joke';
 
-function SearchedJokes({ searchTerm }) {
-	const [jokes, setJokes] = useState([]);
+import * as searchJokes from '../redux/actions';
 
+const SearchedJokes = () => {
+	const [jokes, setJokes] = useState([]);
 	useEffect(() => {
 		axios.get('https://icanhazdadjoke.com/search', {
 			params: {
-				term: searchTerm
+				term: 'duck'
 			}, 'headers': {
 				'Accept': 'application/json'
 			}
@@ -35,5 +37,7 @@ function SearchedJokes({ searchTerm }) {
 		</div>
 	);
 }
-
-export default SearchedJokes;
+export default connect(
+	null,
+	{ searchJokes }
+)(SearchedJokes);

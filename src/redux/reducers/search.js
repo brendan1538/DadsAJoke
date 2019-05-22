@@ -1,8 +1,8 @@
-const initialState = {
+export const initialState = {
 	searching: false,
-	searchTerm: ''
+	searchTerm: "duck",
 }
 
-export default function searchReducer(state = initialState, action) {
-	return ("Search reducer");
+export const searchReducer = (state = initialState, action) => {
+	return { ...state, searching: true }
 }

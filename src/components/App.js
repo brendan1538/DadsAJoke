@@ -5,14 +5,13 @@ import './App.css';
 import Search from './Search';
 import SearchedJokes from './SearchedJokes';
 import DadJokes from './DadJokes'
-import '../redux/client';
 
 class App extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      search: true
+      search: false
     }
   }
   // Conditional rendering functions (random jokes, or searched jokes)
@@ -43,7 +42,6 @@ class App extends React.Component {
             <form className="col s12">
               <div className="row">
                 <Search />
-                <a className="waves-effect waves-light btn">Search</a>
               </div>
             </form>
           </div>

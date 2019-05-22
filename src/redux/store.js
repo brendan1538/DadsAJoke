@@ -1,9 +1,15 @@
-import { applyMiddleware, createStore } from 'redux';
+import { applyMiddleware, createStore, combineReducers } from 'redux';
 
 import { createLogger } from 'redux-logger';
 import thunk from 'redux-thunk';
-import searchReducer from './reducers/index'
+import * as searchReducer from './reducers/search';
+import * as randomReducer from './reducers/random';
 
 const middleware = applyMiddleware(thunk, createLogger());
 
-export default createStore(searchReducer, middleware);
+const rootReducer = combineReducers({
+	searchReducer,
+	randomReducer
+});
+
+export default createStore(rootReducer, middleware);
