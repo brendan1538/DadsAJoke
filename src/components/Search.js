@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { searchJokes } from '../redux/actions'
+import { searchJokes } from '../redux/actions';
 
 class Search extends React.Component {
 	constructor(props) {
@@ -17,8 +17,8 @@ class Search extends React.Component {
 	}
 
 	handleSearch() {
-		console.log(this.state.input);
 		this.props.searchJokes(this.state.input);
+		// this.props.isSearching(true);
 	}
 
 	_handleKeyDown = (e) => {
@@ -29,16 +29,23 @@ class Search extends React.Component {
 
 	render() {
 		return (
-			<div className="input-field col s11">
+			<div className="input-field col s12">
 				<i className="material-icons prefix">search</i>
 				<input type="text" id="search-input" onChange={e => this.updateInput(e.target.value)} onKeyDown={this._handleKeyDown} />
-				<label for="search-input">Search for Dad jokes...</label>
+				<label htmlFor="search-input">Search for Dad jokes...</label>
 				<a className="waves-effect waves-light btn" onClick={this.handleSearch}>Search</a>
 			</div>
 		);
 	}
 }
-export default connect(
-	null,
-	{ searchJokes }
-)(Search);
+const mapState = state => {
+	return {
+		searchTerm: state.searchTerm
+	}
+}
+const mapDispatchToProps = dispatch => {
+	return {
+		searchJokes: (input) => dispatch(searchJokes(input))
+	};
+}
+export default connect(mapState, mapDispatchToProps)(Search);

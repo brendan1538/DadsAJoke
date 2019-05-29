@@ -9,7 +9,7 @@ function Joke({ joke, index }) {
 					<p className="flow-text">{joke.text}</p>
 				</div>
 				<div className="card-action single">
-					<a href="#">Share on Slack</a>
+					<a href="idontworklol">Share on Slack</a>
 				</div>
 			</div>
 		</div>

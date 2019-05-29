@@ -12,10 +12,6 @@ code {
     monospace;
 }
 
-.card.small .card-content, .card.medium .card-content, .card.large .card-content {
-  overflow: scroll;
-}
-
 .card .card-action.single a:not(.btn):not(.btn-large):not(.btn-small):not(.btn-large):not(.btn-floating) {
   margin-right: 0;
 }

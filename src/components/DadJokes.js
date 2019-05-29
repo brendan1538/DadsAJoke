@@ -1,25 +1,30 @@
 import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
 import axios from 'axios';
 
 import Joke from './Joke';
 
-function DadJokes() {
+const DadJokes = ({ searching, searchTerm }) => {
 	const [jokes, setJokes] = useState([]);
 
-	// Retreive jokes from api and add to state hook
 	useEffect(() => {
-		axios.get('https://icanhazdadjoke.com/', {
-			'headers': {
+		axios.get('https://icanhazdadjoke.com/search', {
+			params: {
+				term: searchTerm
+			}, 'headers': {
 				'Accept': 'application/json'
 			}
 		})
 			.then(res => {
-				const newJokes = [...jokes, { text: res.data.joke }];
+				// 1. Loop through search results and joke to the newJokes array
+				// 2. Add newJokes array to state to map through later.
+				let newJokes = []
+				for (let i = 0; i < res.data.results.length; i++) {
+					newJokes.push({ text: res.data.results[i].joke });
+				}
 				setJokes(newJokes);
-				console.log(res);
 			})
 			.catch(err => console.log(err));
-
 	}, []);
 
 	return (
@@ -28,7 +33,14 @@ function DadJokes() {
 				<Joke key={index} index={index} joke={joke} />
 			))}
 		</div>
-	)
+	);
 }
 
+// const mapState = state => {
+// 	return {
+// 		type: state.type,
+// 		searching: state.searching,
+// 		searchTerm: state.searchTerm
+// 	}
+// };
 export default DadJokes;

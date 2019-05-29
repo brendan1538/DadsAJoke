@@ -1,9 +1,9 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 import './App.css';
 
 import Search from './Search';
-import SearchedJokes from './SearchedJokes';
 import DadJokes from './DadJokes'
 
 class App extends React.Component {
@@ -11,32 +11,16 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      search: false
+      searching: this.props.searching,
+      searchTerm: this.props.searchTerm
     }
-  }
-  // Conditional rendering functions (random jokes, or searched jokes)
-  renderDadJokes() {
-    return (
-      <div>
-        <DadJokes />
-        <DadJokes />
-        <DadJokes />
-      </div>
-    )
-  }
-  renderSearchJokes() {
-    return (
-      <div>
-        <SearchedJokes searchTerm="duck" />
-      </div>
-    )
   }
 
   render() {
     return (
       <div className="App">
         <header className="App-header">
-          <h1>dad's a joke!</h1>
+          <h1>dad jokes</h1>
 
           <div className="row search-row">
             <form className="col s12">
@@ -47,7 +31,7 @@ class App extends React.Component {
           </div>
 
           <div className="row joke-row">
-            {this.state.search ? this.renderSearchJokes() : this.renderDadJokes()}
+            <DadJokes searching={this.state.searching} searchTerm={this.state.searchTerm} />
           </div>
         </header>
       </div>
@@ -55,4 +39,10 @@ class App extends React.Component {
   }
 }
 
-export default App;
+const mapState = state => {
+  return {
+    searching: state.searching,
+    searchTerm: state.searchTerm,
+  }
+};
+export default connect(mapState)(App);
