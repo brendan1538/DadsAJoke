@@ -8,7 +8,6 @@ export const initialState = {
 export const searchReducer = (state = initialState, action) => {
 	switch (action.type) {
 		case SEARCH: {
-			console.log(action);
 			return {
 				...state,
 				searching: true,
@@ -16,9 +15,7 @@ export const searchReducer = (state = initialState, action) => {
 			}
 		}
 		default: {
-			return {
-				state
-			}
+			return state;
 		}
 	}
 }

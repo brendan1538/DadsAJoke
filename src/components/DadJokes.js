@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { connect } from 'react-redux';
 import axios from 'axios';
 
 import Joke from './Joke';
@@ -8,6 +7,7 @@ const DadJokes = ({ searching, searchTerm }) => {
 	const [jokes, setJokes] = useState([]);
 
 	useEffect(() => {
+		console.log(searchTerm)
 		axios.get('https://icanhazdadjoke.com/search', {
 			params: {
 				term: searchTerm
