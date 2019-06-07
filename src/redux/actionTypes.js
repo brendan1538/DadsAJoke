@@ -1,2 +1,2 @@
 export const SEARCH = 'SEARCH';
-export const IS_SEARCHING = 'IS_SEARCHING';
+export const SEARCH_COMPLETE = 'SEARCH_COMPLETE';

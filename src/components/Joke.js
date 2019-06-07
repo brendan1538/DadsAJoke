@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Joke({ joke, index }) {
+function Joke({ joke, index, searchTerm }) {
 	return (
 		<div className="col s1 m4">
 			<div className="card lighten-1 medium">

@@ -18,7 +18,6 @@ class Search extends React.Component {
 
 	handleSearch() {
 		this.props.searchJokes(this.state.input);
-		// this.props.isSearching(true);
 	}
 
 	_handleKeyDown = (e) => {

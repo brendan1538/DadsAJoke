@@ -1,8 +1,8 @@
-import { SEARCH, IS_SEARCHING } from '../actionTypes';
+import { SEARCH, SEARCH_COMPLETE } from '../actionTypes';
 
 export const initialState = {
-	searching: false,
-	searchTerm: "",
+	searchComplete: null,
+	searchTerm: null,
 }
 
 export const searchReducer = (state = initialState, action) => {
@@ -10,7 +10,14 @@ export const searchReducer = (state = initialState, action) => {
 		case SEARCH: {
 			return {
 				...state,
-				searching: true,
+				searchComplete: false,
+				searchTerm: action.searchTerm
+			}
+		}
+		case SEARCH_COMPLETE: {
+			return {
+				...state,
+				searchComplete: action.searchComplete,
 				searchTerm: action.searchTerm
 			}
 		}

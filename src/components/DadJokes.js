@@ -1,16 +1,23 @@
 import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
 import axios from 'axios';
 
 import Joke from './Joke';
+import { searchComplete } from '../redux/actions';
 
-const DadJokes = ({ searching, searchTerm }) => {
-	const [jokes, setJokes] = useState([]);
+class DadJokes extends React.Component {
 
-	useEffect(() => {
-		console.log(searchTerm)
+	constructor(props) {
+		super(props);
+		this.state = {
+			jokes: []
+		}
+	}
+
+	componentWillReceiveProps() {
 		axios.get('https://icanhazdadjoke.com/search', {
 			params: {
-				term: searchTerm
+				term: this.props.searchTerm
 			}, 'headers': {
 				'Accept': 'application/json'
 			}
@@ -22,25 +29,36 @@ const DadJokes = ({ searching, searchTerm }) => {
 				for (let i = 0; i < res.data.results.length; i++) {
 					newJokes.push({ text: res.data.results[i].joke });
 				}
-				setJokes(newJokes);
+				this.setState({ jokes: newJokes });
+				this.props.searchComplete(true);
 			})
 			.catch(err => console.log(err));
-	}, []);
+	}
 
-	return (
-		<div>
-			{jokes.map((joke, index) => (
-				<Joke key={index} index={index} joke={joke} />
-			))}
-		</div>
-	);
+	render() {
+		return (
+			<div>
+				<h5>Search{this.props.searchComplete ? "ed" : null} for {this.props.searchTerm} jokes...</h5>
+				<div className="row joke-row">
+					{this.props.searchComplete ? this.state.jokes.map((joke, index) => (
+						<Joke key={index} index={index} joke={joke} />
+					)) : null}
+				</div>
+			</div >
+		);
+	}
 }
 
-// const mapState = state => {
-// 	return {
-// 		type: state.type,
-// 		searching: state.searching,
-// 		searchTerm: state.searchTerm
-// 	}
-// };
-export default DadJokes;
+const mapState = state => {
+	return {
+		searching: state.searchComplete,
+		searchTerm: state.searchTerm,
+	}
+};
+const mapDispatchToProps = dispatch => {
+	return {
+		searchComplete: (bool) => dispatch(searchComplete(bool))
+	};
+};
+
+export default connect(mapState, mapDispatchToProps)(DadJokes);

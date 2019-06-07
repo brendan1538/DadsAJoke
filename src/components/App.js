@@ -16,6 +16,7 @@ class App extends React.Component {
     }
   }
 
+
   render() {
     return (
       <div className="App">
@@ -30,9 +31,8 @@ class App extends React.Component {
             </form>
           </div>
 
-          <div className="row joke-row">
-            <DadJokes searching={this.state.searching} searchTerm={this.state.searchTerm} />
-          </div>
+          <DadJokes />
+
         </header>
       </div>
     );
@@ -41,7 +41,7 @@ class App extends React.Component {
 
 const mapState = state => {
   return {
-    searching: state.searching,
+    searchComplete: state.searchComplete,
     searchTerm: state.searchTerm,
   }
 };
